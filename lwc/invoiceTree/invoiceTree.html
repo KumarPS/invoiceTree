@@ -1,0 +1,28 @@
+<!--
+  @description       : 
+  @author            : kumarsarkar93@gmail.com
+  @group             : 
+  @last modified on  : 07-28-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <lightning-card title="Invoices">
+        <template for:each={invoices} for:item="invoice">
+            <div key={invoice.id}>
+                <lightning-button variant="base" label={invoice.name} onclick={toggleLineItems} data-id={invoice.id}></lightning-button>
+                <template if:true={invoice.expanded}>
+                    <ul>
+                        <template for:each={invoice.lineItems} for:item="lineItem">
+                            <li key={lineItem.id} class="slds-p-left_x-large">{lineItem.Name}</li>
+                        </template>
+                        <template if:true={invoice.hasMore}>
+                            <li class="slds-p-left_x-large">
+                                <lightning-button label="View More" onclick={loadMore} data-id={invoice.id}></lightning-button>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+            </div>
+        </template>
+    </lightning-card>
+</template>
